@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Macos finder
+.DS_Store
+
+# WebStorm
+.idea/
