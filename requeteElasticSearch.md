@@ -24,6 +24,8 @@ GET /movies/_search
   }
 }
 ````
+    
+})
 
 ## Trier par date de sortie
 parametre apres order => $order ("asc"/"desc")
