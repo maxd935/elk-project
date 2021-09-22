@@ -1,35 +1,47 @@
-import {useEffect, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import API from "../API/API";
 
-export default function GenresList(){
+export default function GenresList({selectedGenres, setSelectedGenres}){
     const [genres, setGenres] = useState([]);
     useEffect(() => {API.allGenres().then(data => {
         console.log("all genres:")
         console.log(data.aggregations.genres.buckets)
         setGenres(data.aggregations.genres.buckets)
     })}, [])
+    useEffect(() => {setSelectedGenres([])}, [])
+
+    const toggleGenre = (genre) => () => {
+        let selectedGenres_ = selectedGenres;
+        let index = selectedGenres_.indexOf(genre);
+
+        if (index === -1) {
+            selectedGenres_.push(genre);
+        } else {
+            selectedGenres_.splice(index, 1);
+        }
+        setSelectedGenres(selectedGenres_)
+        console.log(selectedGenres)
+    }
 
     const ShowGenres = () => {
-        if (genres.length === 0){
-            return <li>
-            </li>
-        }
-        else {
-            return genres.map((genre) => (
-                <li key={genre.key}>
+        return genres.map((genre) => (
+            <Fragment key={genre.key}>
+                <label>
                     {genre.key} ({genre.doc_count})
-                </li>
-            ))
-        }
-
+                    <input type="checkbox" id={genre.key} name={genre.key} value={genre.key} onChange={toggleGenre(genre.key)}/>
+                </label>
+                <br/>
+            </Fragment>
+        ))
     }
 
     return (
         <>
             <h2>Genres List:</h2>
-            <ul>
+            <form >
                 <ShowGenres/>
-            </ul>
+                <br/>
+            </form>
         </>
     )
 }

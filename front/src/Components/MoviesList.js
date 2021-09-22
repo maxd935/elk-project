@@ -2,7 +2,7 @@ import MovieItem from "./MovieItem";
 import {useEffect, useState} from "react";
 import API from "../API/API";
 
-export default function MoviesList(){
+export default function MoviesList({selectedGenres}){
     const [movies, setMovies] = useState([]);
     useEffect(() => {
         API.filmsPlusRecents().then(data => {

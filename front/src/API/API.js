@@ -14,6 +14,18 @@ export default class API {
         return this.fetchElasticSearch(query)
     }
 
+    static byGenre(genres) {
+        let query = {
+            "query": {
+                "bool":{
+                    "must":[]
+                }
+            }
+        }
+        genres.forEach(genre => {query.query.bool.must.push({"term":{"genres":genre}})})
+        return this.fetchElasticSearch(query)
+    }
+
     static allMarvel() {
         let query = {
             "query": {

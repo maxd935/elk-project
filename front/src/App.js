@@ -2,14 +2,16 @@ import logo from './logo.svg';
 import './App.css';
 import MoviesList from "./Components/MoviesList";
 import GenresList from "./Components/GenresList";
+import {useState} from "react";
 
 function App() {
-  return (
+    const [selectedGenres, setSelectedGenres] = useState([]);
+    return (
     <div className="App">
-        <MoviesList/>
-        <GenresList/>
+        <MoviesList selectedGenres={selectedGenres}/>
+        <GenresList selectedGenres={selectedGenres} setSelectedGenres={setSelectedGenres}/>
     </div>
-  );
+    );
 }
 
 export default App;
