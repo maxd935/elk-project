@@ -1,22 +1,51 @@
-export default function API() {
+export default class API {
+    static url = "http://localhost:9200/movies/_search"
 
-    const url = "http://localhost:9200/movies/_search"
-    const query = {
-        "query": {
-            "match": {
-                "title": "Marvel"
+    static allGenres() {
+        let query = {
+            "aggs": {
+                "genres": {
+                    "terms": {
+                        "field": "genres"
+                    }
+                }
             }
         }
+        return this.fetchElasticSearch(query)
     }
-    const opt = {
-        method: 'POST',
-        headers: [
-            ["Content-Type", "application/json"]
-        ],
-        body: JSON.stringify(query)
+
+    static allMarvel() {
+        let query = {
+            "query": {
+                "match": {
+                    "title": "Marvel"
+                }
+            }
+        }
+        return this.fetchElasticSearch(query)
     }
-    return fetch(url, opt)
-        .then((response) => response.json())
-        .then(data => {return data.hits.hits})
-        .catch((error) => console.error(error))
+
+    static filmsPlusRecents() {
+        let query = {
+            "query": {
+                "match": {
+                    "title": "Marvel"
+                }
+            }
+        }
+        return this.fetchElasticSearch(query)
+    }
+
+    static fetchElasticSearch(elasticsearch_query) {
+        return fetch(this.url, {
+            method: 'POST',
+            headers: [
+                ["Content-Type", "application/json"]
+            ],
+            body: JSON.stringify(elasticsearch_query)
+        })
+            .then((response) => response.json())
+            .then(data => {return data})
+            .catch((error) => console.error(error))
+    }
 }
