@@ -19,7 +19,7 @@ export default function MoviesList(){
         })
     }
 
-    const ShowMovies = () => () => {
+    const ShowMovies = () => {
         if (movies.length === 0){
             return <li>
             </li>
@@ -36,9 +36,9 @@ export default function MoviesList(){
 
     return (
         <>
-            <button title="Press" onClick={add_movies()}/>
+            <button onClick={add_movies()}>Press</button>
             <ul>
-                {ShowMovies}
+                <ShowMovies/>
             </ul>
         </>
     )
