@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import APITest from "./Components/APITest";
+import MoviesList from "./Components/MoviesList";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         </a>
       </header>
 
-      <APITest/>
+      <MoviesList/>
 
     </div>
   );
