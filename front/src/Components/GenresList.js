@@ -7,20 +7,11 @@ export default function GenresList({selectedGenres, setSelectedGenres}){
         console.log("all genres:")
         console.log(data.aggregations.genres.buckets)
         setGenres(data.aggregations.genres.buckets)
+        setSelectedGenres([])
     })}, [])
-    useEffect(() => {setSelectedGenres([])}, [])
 
     const toggleGenre = (genre) => () => {
-        let selectedGenres_ = selectedGenres;
-        let index = selectedGenres_.indexOf(genre);
-
-        if (index === -1) {
-            selectedGenres_.push(genre);
-        } else {
-            selectedGenres_.splice(index, 1);
-        }
-        setSelectedGenres(selectedGenres_)
-        console.log(selectedGenres)
+        setSelectedGenres(selectedGenres.includes(genre) ? selectedGenres.filter(g => g !== genre) : [...selectedGenres, genre])
     }
 
     const ShowGenres = () => {
