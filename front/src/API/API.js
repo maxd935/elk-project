@@ -54,9 +54,25 @@ export default class API {
                 { "release_date" : {"order" : "desc", "format": "strict_date"}}
             ]
         }
-        console.log(query.sort[0].release_date.order)
         query.sort[0].release_date.order=order
-        console.log(query.sort[0].release_date.order)
         return this.fetchElasticSearch(query)
     }
+
+
+    static filmsByRechText(texte) {
+        let query = {
+            "query": {
+                "multi_match" : {
+                    "query": "Marvel",
+                    "type": "best_fields",
+                    "fields": [ "title", "overview" ]
+                }
+            }
+        }
+        query.query.multi_match.query=texte
+        return this.fetchElasticSearch(query)
+    }
+
+
+
 }

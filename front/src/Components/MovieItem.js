@@ -13,7 +13,7 @@ export default function MovieItem({movie}){
 
     const showGenres = (genres) => {
         if (genres.length === 0) {
-            return <></>
+            return null
         } else {
             return genres.map( (genre) =>
                 <li key={genre} style={{listStyle: "none"}}>
