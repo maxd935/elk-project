@@ -4,6 +4,7 @@ import API from "../API/API";
 import OrderButton from "./OrderButton";
 import SearchText from "./SearchText";
 import ListGenres from "./ListGenres";
+import DateToRange from "./DateToRange";
 
 export default function MoviesList(){
     const [movies, setMovies] = useState([]);
@@ -34,6 +35,7 @@ export default function MoviesList(){
             <h2>Movies List</h2>
             <OrderButton onMovies={setMovies}/>
             <SearchText onMovies={setMovies}/>
+            <DateToRange onMovies={setMovies}/>
             <ul>
                 {showMovies()}
             </ul>

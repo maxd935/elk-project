@@ -51,10 +51,9 @@ export default class API {
     static filmsByOrder(order) {
         let query = {
             "sort" : [
-                { "release_date" : {"order" : "desc", "format": "strict_date"}}
+                { "release_date" : {"order" : order, "format": "strict_date"}}
             ]
         }
-        query.sort[0].release_date.order=order
         return this.fetchElasticSearch(query)
     }
 
@@ -63,13 +62,43 @@ export default class API {
         let query = {
             "query": {
                 "multi_match" : {
-                    "query": "Marvel",
+                    "query": texte,
                     "type": "best_fields",
                     "fields": [ "title", "overview" ]
                 }
             }
         }
-        query.query.multi_match.query=texte
+        return this.fetchElasticSearch(query)
+    }
+
+    static filmsByDate(dateOf, dateTo) {
+        let query = {
+            "query": {
+                "bool":{
+                    "must":[
+                        {"range": { "release_date": { "gte": dateOf,  "lte": dateTo}}}
+                    ]
+                }
+            }
+        }
+        return this.fetchElasticSearch(query)
+    }
+
+    static filmMinDate() {
+        let query = {
+            "aggs": {
+                "min_date": { "min": { "field": "release_date" } }
+            }
+        }
+        return this.fetchElasticSearch(query)
+    }
+
+    static filmMaxDate() {
+        let query = {
+            "aggs": {
+                "max_date": { "max": { "field": "release_date" } }
+            }
+        }
         return this.fetchElasticSearch(query)
     }
 

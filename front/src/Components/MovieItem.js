@@ -8,7 +8,7 @@ export default function MovieItem({movie}){
 
     const secondToDate = (seconds) => {
         const date = new Date(seconds);
-        return date.toString()
+        return date.toLocaleDateString()
     }
 
     const showGenres = (genres) => {
