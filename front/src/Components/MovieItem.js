@@ -7,7 +7,7 @@ export default function MovieItem({movie}){
     }
 
     const secondToDate = (seconds) => {
-        const date = new Date(seconds);
+        const date = new Date(1000*seconds);
         return date.toLocaleDateString()
     }
 

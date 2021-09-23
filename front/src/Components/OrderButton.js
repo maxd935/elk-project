@@ -4,7 +4,7 @@ import {useState} from "react";
 export default function OrderButton({onMovies}){
     const [order, setOrder] = useState("asc");
 
-    const toogleOrder = (order) => () => {
+    const toggleOrder = (order) => () => {
         API.filmsByOrder(order).then(data => {
             onMovies(data.hits.hits);
         })
@@ -13,6 +13,6 @@ export default function OrderButton({onMovies}){
     }
 
     return (
-        <button onClick={toogleOrder(order)}>Trie par date : {order==="asc" ? "recent" : "ancien"} </button>
+        <button onClick={toggleOrder(order)}>Trie par date : {order==="asc" ? "recent" : "ancien"} </button>
     )
 }
