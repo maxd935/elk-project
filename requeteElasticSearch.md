@@ -1,5 +1,4 @@
-## Tout les films "les plus récent" par défaut
-
+## Tout les films "les plus récent" par défaut - OK
 ````bash
 GET /movies/_search
 {
@@ -9,7 +8,7 @@ GET /movies/_search
 }
 ````
 
-## Films par catégories (AND)
+## Films par catégories (AND) - OK
 tableau apres must => $genres = [{ "term": { "genres": "$genre"}}]
 ````bash
 GET /movies/_search
@@ -27,7 +26,7 @@ GET /movies/_search
     
 })
 
-## Trier par date de sortie
+## Trier par date de sortie - OK
 parametre apres order => $order ("asc"/"desc")
 ````bash
 GET /movies/_search
@@ -38,7 +37,7 @@ GET /movies/_search
 }
 ````
 
-## Recherche de film par titre ou synopsis
+## Recherche de film par titre ou synopsis - OK
 parametre apres order => $search
 ````bash
 GET /movies/_search
@@ -52,7 +51,7 @@ GET /movies/_search
 }
 ````
 
-## Recherche de film par plage de date
+## Recherche de film par plage de date - OK
 parametres apres gte et lte => $gte et $lte
 ````bash
 GET /movies/_search
