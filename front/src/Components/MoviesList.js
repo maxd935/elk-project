@@ -1,6 +1,7 @@
 import MovieItem from "./MovieItem";
 import {Fragment, useEffect, useState} from "react";
 import API from "../API/API";
+import OrderButton from "./OrderButton";
 
 export default function MoviesList(){
     const [movies, setMovies] = useState([]);
@@ -17,6 +18,7 @@ export default function MoviesList(){
         })
     }, [])
 
+    // BUG QUAND ON REMET LA CHECKLIST VIDE
     const toggleGenre = (genre) => () => {
         let selectedGenres_ = selectedGenres.includes(genre) ? selectedGenres.filter(g => g !== genre) : [...selectedGenres, genre]
         API.byGenre(selectedGenres_).then(data => {
@@ -38,7 +40,7 @@ export default function MoviesList(){
         }
     }
 
-    const showGenres = () => {
+    const showListGenres = () => {
         if (genres.length === 0) {
             return <></>
         } else {
@@ -55,15 +57,17 @@ export default function MoviesList(){
         }
     }
 
+    console.log(movies)
     return (
         <>
-            <h2>Movies List:</h2>
+            <h2>Movies List</h2>
+            <OrderButton onMovies={setMovies}/>
             <ul>
                 {showMovies()}
             </ul>
-            <h2>Genres List:</h2>
-            <form >
-                {showGenres()}
+            <h2>Genres List</h2>
+            <form>
+                {showListGenres()}
                 <br/>
             </form>
         </>
