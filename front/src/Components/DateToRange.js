@@ -21,19 +21,17 @@ export default function DateToRange({onMovies}){
             })
         },[dateMin, dateMin]
     )
-    console.log(dateMin+" to "+dateMax)
-    console.log(dateOf+" to "+dateTo)
 
-    const handleChangeDateOf = (e) => {
-        setDateOf(e.target.value)
-        API.filmsByDate(dateOf,dateTo).then((data) => {
-            onMovies(data.hits.hits)
-        })
-    }
 
-    const handleChangeDateTo = (e) => {
-        setDateTo(e.target.value)
-        API.filmsByDate(dateOf,dateTo).then((data) => {
+    const handleChangeDate = (e) => {
+        if (e.target.name === "dateTo") {
+            setDateTo(e.target.value)
+        }
+        else {
+            setDateOf(e.target.value)
+        }
+        API.filmsByDate(new Date(dateOf).getTime(), new Date(dateTo).getTime())
+            .then((data) => {
             onMovies(data.hits.hits)
         })
     }
@@ -46,7 +44,7 @@ export default function DateToRange({onMovies}){
                        name="dateOf"
                        min={dateMin} max={dateMax}
                        value={dateOf}
-                       onChange={handleChangeDateOf} />
+                       onChange={handleChangeDate} />
             </label>
             <label>
                 à :
@@ -54,7 +52,7 @@ export default function DateToRange({onMovies}){
                        name="dateTo"
                        min={dateMin} max={dateMax}
                        value={dateTo}
-                       onChange={handleChangeDateTo} />
+                       onChange={handleChangeDate} />
             </label>
         </>
     )
