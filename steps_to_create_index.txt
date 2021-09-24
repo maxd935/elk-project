@@ -1,0 +1,4 @@
+Generate a ndjson formatted database with: https://github.com/mradamlacey/json-to-es-bulk
+
+Upload manually using kibana: Home -> add data -> advanced
+Change "release_date" type to "date".
