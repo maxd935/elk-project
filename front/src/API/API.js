@@ -70,19 +70,12 @@ export default class API {
         } else {
             this.query.query.bool.must = [
                 {"multi_match":{
-                        "fields": [ "text", "overview" ],
-                        "query": text,
-                        "fuzziness": 2
+                        "fields": [ "title", "overview" ],
+                        "query": text
                     }
                 }
             ]
         }
-        console.log("query:")
-        console.log(this.query)
-        this.fetchElasticSearch().then(data => {
-            console.log("response:")
-            console.log(data);
-        })
         return this.fetchElasticSearch()
     }
 
