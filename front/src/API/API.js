@@ -26,7 +26,9 @@ export default class API {
             },
             "min_date": { "min": { "field": "release_date" } },
             "max_date": { "max": { "field": "release_date" } }
-        }
+        },
+        "from": 0,
+        "size": 10,
     }
 
     static fetchElasticSearch() {
@@ -86,6 +88,12 @@ export default class API {
 
     static setDateRange(dateOf, dateTo) {
         this.query.query.bool.filter[0].range.release_date = { "gte": dateOf,  "lte": dateTo}
+        return this.fetchElasticSearch()
+    }
+
+    static filmPagination(from, size) {
+        this.query.from = from
+        this.query.size = size
         return this.fetchElasticSearch()
     }
 }

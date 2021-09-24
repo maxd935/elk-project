@@ -5,6 +5,7 @@ import OrderButton from "./OrderButton";
 import SearchText from "./SearchText";
 import ListGenres from "./ListGenres";
 import DateToRange from "./DateToRange";
+import SizePage from "./Pagination";
 
 export default function MoviesList(){
     const [movies, setMovies] = useState([]);
@@ -38,6 +39,7 @@ export default function MoviesList(){
             <OrderButton onMovies={setMovies}/>
             <SearchText onMovies={setMovies}/>
             <DateToRange onMovies={setMovies}/>
+            <SizePage onMovies={setMovies}/>
             <ul>
                 {showMovies()}
             </ul>
