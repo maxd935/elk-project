@@ -10,7 +10,7 @@ export default function MoviesList(){
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
-        API.filmsPlusRecents().then(data => {
+        API.fetchElasticSearch().then(data => {
             setMovies(data.hits.hits)
         });
     }, [])
@@ -32,6 +32,8 @@ export default function MoviesList(){
 
     return (
         <>
+            <h2>Genres List</h2>
+            <ListGenres onMovies={setMovies}/>
             <h2>Movies List</h2>
             <OrderButton onMovies={setMovies}/>
             <SearchText onMovies={setMovies}/>
@@ -39,8 +41,6 @@ export default function MoviesList(){
             <ul>
                 {showMovies()}
             </ul>
-            <h2>Genres List</h2>
-            <ListGenres onMovies={setMovies}/>
         </>
     )
 }

@@ -7,7 +7,7 @@ export default function ListGenres({onMovies}) {
     const [selectedGenres, setSelectedGenres] = useState([]);
 
     useEffect(() => {
-        API.allGenres().then(data => {
+        API.setGenres([]).then(data => {
             setGenres(data.aggregations.genres.buckets)
         })
     }, [])
@@ -15,7 +15,7 @@ export default function ListGenres({onMovies}) {
     // BUG QUAND ON REMET LA CHECKLIST VIDE
     const toggleGenre = (genre) => () => {
         let selectedGenres_ = selectedGenres.includes(genre) ? selectedGenres.filter(g => g !== genre) : [...selectedGenres, genre]
-        API.byGenre(selectedGenres_).then(data => {
+        API.setGenres(selectedGenres_).then(data => {
             onMovies(data.hits.hits)
             setSelectedGenres(selectedGenres_)
         })

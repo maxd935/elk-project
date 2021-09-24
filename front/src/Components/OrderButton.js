@@ -5,7 +5,7 @@ export default function OrderButton({onMovies}){
     const [order, setOrder] = useState("asc");
 
     const toggleOrder = (order) => () => {
-        API.filmsByOrder(order).then(data => {
+        API.setOrder(order).then(data => {
             onMovies(data.hits.hits);
         })
         const new_order = order==="asc" ? "desc" : "asc"

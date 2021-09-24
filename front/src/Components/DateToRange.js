@@ -9,17 +9,15 @@ export default function DateToRange({onMovies}){
 
     useEffect(() =>
         {
-            API.filmMinDate().then((data) => {
+            API.fetchElasticSearch().then((data) => {
                 const dateMinAPI = new Date(data.aggregations.min_date.value).toJSON().split('T')[0]
                 setDateMin(dateMinAPI)
                 setDateOf(dateMinAPI)
-            })
-            API.filmMaxDate().then((data) => {
                 const dateMaxAPI = new Date(data.aggregations.max_date.value).toJSON().split('T')[0]
                 setDateMax(dateMaxAPI)
                 setDateTo(dateMaxAPI)
             })
-        },[dateMin, dateMin]
+        },[dateMin, dateMax]
     )
 
 
@@ -30,7 +28,7 @@ export default function DateToRange({onMovies}){
         else {
             setDateOf(e.target.value)
         }
-        API.filmsByDate(new Date(dateOf).getTime(), new Date(dateTo).getTime())
+        API.setDateRange(new Date(dateOf).getTime()/1000, new Date(dateTo).getTime()/1000)
             .then((data) => {
             onMovies(data.hits.hits)
         })
